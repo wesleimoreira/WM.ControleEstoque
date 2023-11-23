@@ -2,20 +2,29 @@
 {
     public class Fornecedor : EntidadeBase
     {
-        private Fornecedor(string fornecedorNome)
+        public Fornecedor(string fornecedorNome, string fornecedorTelefone, Guid enderecoId)
         {
+            EnderecoId = enderecoId;
             FornecedorNome = fornecedorNome;
-        }
+            FornecedorTelefone = fornecedorTelefone;
+        }      
 
+        public Guid EnderecoId { get; private set; }
         public string FornecedorNome { get; private set; }
+        public string FornecedorTelefone { get; private set; }
+
         public IEnumerable<Produto> Produtos { get; private set; } = default!; // EF
         public IEnumerable<CompraProduto> CompraProdutos { get; private set; } = default!; // EF
 
-        public static Fornecedor CadastroDeFornecedor(string fornecedorNome)
+        public static Fornecedor CadastroDeFornecedor(string fornecedorNome, string fornecedorTelefone, Guid enderecoId)
         {
             if (string.IsNullOrWhiteSpace(fornecedorNome)) return default!;
 
-            return new Fornecedor(fornecedorNome);
+            if (string.IsNullOrWhiteSpace(fornecedorTelefone)) return default!;
+
+            if (string.IsNullOrWhiteSpace(enderecoId.ToString())) return default!;
+
+            return new Fornecedor(fornecedorNome, fornecedorTelefone, enderecoId);
         }
     }
 }

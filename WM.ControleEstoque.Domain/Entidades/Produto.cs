@@ -2,7 +2,7 @@
 {
     public class Produto : EntidadeBase
     {
-        public Produto(string produtoNome, int quantidadeEstoque, decimal produtoValorUnitario, Guid categoriaId, Guid fornecedorId)
+        private Produto(string produtoNome, int quantidadeEstoque, decimal produtoValorUnitario, Guid categoriaId, Guid fornecedorId)
         {
             CategoriaId = categoriaId;
             ProdutoNome = produtoNome;

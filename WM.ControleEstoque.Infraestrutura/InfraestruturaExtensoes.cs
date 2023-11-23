@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using WM.ControleEstoque.Dominio.Interfaces;
 using WM.ControleEstoque.Infraestrutura.DB;
+using WM.ControleEstoque.Infraestrutura.Persistencias;
 
 namespace WM.ControleEstoque.Infraestrutura
 {
@@ -15,6 +17,16 @@ namespace WM.ControleEstoque.Infraestrutura
                     b.MigrationsAssembly("WM.ControleEstoque.Api");
                 });
             });
+
+            services.AddScoped(typeof(IRepositorio<>), typeof(Repositorio<>));
+
+            services.AddScoped<ILojaRepositorio, LojaRepositorio>();
+            services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
+            services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+            services.AddScoped<IFornecedorRepositorio, FornecedorRepositorio>();
+            services.AddScoped<IFuncionarioRepositorio, FuncionarioRepositorio>();
+            services.AddScoped<IVendaProdutoRepositorio, VendaProdutoRepositorio>();
+            services.AddScoped<ICompraProdutoRepositorio, CompraProdutoRepositorio>();
         }
     }
 }

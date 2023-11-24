@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WM.ControleEstoque.Aplicacao.Commands.CategoriaCommands;
-using WM.ControleEstoque.Aplicacao.Queries.Categoria;
+using WM.ControleEstoque.Aplicacao.Queries.CategoriaQueries;
 
 namespace WM.ControleEstoque.Api.Controllers
 {

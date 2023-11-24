@@ -8,11 +8,11 @@ namespace WM.ControleEstoque.Aplicacao.Commands.CategoriaCommands
 {
     public class CategoriaCommandHandler : IRequestHandler<CategoriaCommand, CategoriaDto>
     {
-        private readonly ICategoriaRepositorio _categoriaRepositorio;
+        private readonly IUnitOfWork<Categoria> _unitOfWork;
 
-        public CategoriaCommandHandler(ICategoriaRepositorio categoriaRepositorio)
+        public CategoriaCommandHandler(IUnitOfWork<Categoria> unitOfWork)
         {
-            _categoriaRepositorio = categoriaRepositorio;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CategoriaDto> Handle(CategoriaCommand request, CancellationToken cancellationToken)
@@ -21,11 +21,13 @@ namespace WM.ControleEstoque.Aplicacao.Commands.CategoriaCommands
 
             if (categoria is null) return default!;
 
-            var categoriaResult = await _categoriaRepositorio.CadastroDeCategoria(categoria);
+            var categoriaDto = _unitOfWork.WriteRepository.CreateAsync(categoria);
 
-            if (categoriaResult is null) return default!;
+            if (categoriaDto is null) return default!;
 
-            return MetodosJson.JsonSerializerObject<CategoriaDto>(categoriaResult);
+            await _unitOfWork.SaveChangesAsync();
+
+            return MetodosJson.JsonSerializerObject<CategoriaDto>(categoriaDto);
         }
     }
 }

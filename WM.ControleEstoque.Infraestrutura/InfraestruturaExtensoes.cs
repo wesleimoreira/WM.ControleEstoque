@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using WM.ControleEstoque.Dominio.Interfaces;
 using WM.ControleEstoque.Infraestrutura.DB;
-using WM.ControleEstoque.Infraestrutura.Persistencias;
+using WM.ControleEstoque.Infraestrutura.UnitOfWorks;
 
 namespace WM.ControleEstoque.Infraestrutura
 {
@@ -18,15 +18,9 @@ namespace WM.ControleEstoque.Infraestrutura
                 });
             });
 
-            services.AddScoped(typeof(IRepositorio<>), typeof(Repositorio<>));
-
-            services.AddScoped<ILojaRepositorio, LojaRepositorio>();
-            services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
-            services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
-            services.AddScoped<IFornecedorRepositorio, FornecedorRepositorio>();
-            services.AddScoped<IFuncionarioRepositorio, FuncionarioRepositorio>();
-            services.AddScoped<IVendaProdutoRepositorio, VendaProdutoRepositorio>();
-            services.AddScoped<ICompraProdutoRepositorio, CompraProdutoRepositorio>();
+            services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+            services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
+            services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
         }
     }
 }

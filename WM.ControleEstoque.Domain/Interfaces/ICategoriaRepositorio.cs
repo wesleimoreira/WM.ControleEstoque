@@ -5,6 +5,7 @@ namespace WM.ControleEstoque.Dominio.Interfaces
     public interface ICategoriaRepositorio
     {
         Task<Categoria> BuscarCategoria(Guid id);
-        Task CadastroDeCategoria(Categoria categoria);
+        Task<IEnumerable<Categoria>> BuscarCategorias();
+        Task<Categoria> CadastroDeCategoria(Categoria categoria);
     }
 }

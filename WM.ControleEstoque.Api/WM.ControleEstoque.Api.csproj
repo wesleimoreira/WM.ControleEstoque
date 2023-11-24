@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.25">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -18,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WM.ControleEstoque.Infraestrutura\WM.ControleEstoque.Infraestrutura.csproj" />
+    <ProjectReference Include="..\WM.ControleEstoque.Aplicacao\WM.ControleEstoque.Aplicacao.csproj" />
   </ItemGroup>
 
 </Project>

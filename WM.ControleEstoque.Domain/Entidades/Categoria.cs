@@ -2,7 +2,7 @@
 {
     public class Categoria : EntidadeBase
     {
-        private Categoria(string categoriaNome)
+        public Categoria(string categoriaNome)
         {
             CategoriaNome = categoriaNome;
         }

@@ -12,26 +12,37 @@ namespace WM.ControleEstoque.Infraestrutura.Persistencias
         public Repositorio(AplicacaoDbContexto dbContexto)
         {
             _dbContexto = dbContexto;
-        }      
-
-        public async Task AddAsync(T entidade)
-        {
-            await _dbContexto.AddAsync(entidade);
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task<T> AddAsync(T entidade)
         {
-            _dbContexto.Remove(await GetAsync(id));
+            var result = await _dbContexto.AddAsync(entidade);
+
+            if (!result.State.Equals(EntityState.Added)) return default!;
+
+            return result.Entity;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<T> DeleteAsync(Guid id)
         {
-            return await _dbContexto.Set<T>().ToListAsync();
-        }
-        public async Task<T> GetAsync(Guid id)
-        {
-            return await _dbContexto.Set<T>().SingleOrDefaultAsync(x => x.Id.Equals(id)) ?? default!;
+            var result = _dbContexto.Remove(await GetAsync(id));
+
+            if (!result.State.Equals(EntityState.Deleted)) return default!;
+
+            return result.Entity;
         }
 
+        public async Task<bool> SaveChangesAsync()
+        {
+            var result = await _dbContexto.SaveChangesAsync();
+
+            if (result.Equals(0)) return false;
+
+            return true;
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync() => await _dbContexto.Set<T>().ToListAsync();
+
+        public async Task<T> GetAsync(Guid id) => await _dbContexto.Set<T>().SingleOrDefaultAsync(x => x.Id.Equals(id)) ?? default!;
     }
 }

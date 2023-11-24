@@ -17,9 +17,18 @@ namespace WM.ControleEstoque.Infraestrutura.Persistencias
             return await _repositorio.GetAsync(id);
         }
 
-        public async Task CadastroDeCategoria(Categoria categoria)
+        public async Task<IEnumerable<Categoria>> BuscarCategorias()
         {
-           await _repositorio.AddAsync(categoria);
+            return await _repositorio.GetAllAsync();
+        }
+
+        public async Task<Categoria> CadastroDeCategoria(Categoria categoria)
+        {
+            var result = await _repositorio.AddAsync(categoria);
+
+            if (await _repositorio.SaveChangesAsync()) return result;
+
+            return default!;
         }
     }
 }

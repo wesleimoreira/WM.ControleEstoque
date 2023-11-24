@@ -5,9 +5,11 @@ VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WM.ControleEstoque.Dominio", "WM.ControleEstoque.Domain\WM.ControleEstoque.Dominio.csproj", "{8A0B1131-2264-4F9C-9426-E25B47852240}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WM.ControleEstoque.Infraestrutura", "WM.ControleEstoque.Infraestrutura\WM.ControleEstoque.Infraestrutura.csproj", "{2EBA8B1A-D753-4F3B-B806-5B1A3C67B1FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WM.ControleEstoque.Infraestrutura", "WM.ControleEstoque.Infraestrutura\WM.ControleEstoque.Infraestrutura.csproj", "{2EBA8B1A-D753-4F3B-B806-5B1A3C67B1FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WM.ControleEstoque.Api", "WM.ControleEstoque.Api\WM.ControleEstoque.Api.csproj", "{6B3B8AAA-A903-45C8-8C51-ADDB47C04459}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WM.ControleEstoque.Api", "WM.ControleEstoque.Api\WM.ControleEstoque.Api.csproj", "{6B3B8AAA-A903-45C8-8C51-ADDB47C04459}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WM.ControleEstoque.Aplicacao", "WM.ControleEstoque.Aplicacao\WM.ControleEstoque.Aplicacao.csproj", "{42770489-3779-4321-B100-BF21A6E48222}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{6B3B8AAA-A903-45C8-8C51-ADDB47C04459}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B3B8AAA-A903-45C8-8C51-ADDB47C04459}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B3B8AAA-A903-45C8-8C51-ADDB47C04459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42770489-3779-4321-B100-BF21A6E48222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42770489-3779-4321-B100-BF21A6E48222}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42770489-3779-4321-B100-BF21A6E48222}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42770489-3779-4321-B100-BF21A6E48222}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

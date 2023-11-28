@@ -10,11 +10,7 @@ namespace WM.ControleEstoque.Api.Controllers
     public class CategoriaController : ControllerBase
     {
         private readonly IMediator _mediator;
-
-        public CategoriaController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+        public CategoriaController(IMediator mediator) => _mediator = mediator;
 
         [HttpGet]
         public async Task<IActionResult> GetCategoriasAsync()
@@ -46,8 +42,27 @@ namespace WM.ControleEstoque.Api.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCategoriaAsync([FromRoute] Guid id)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(id.ToString())) return BadRequest();
+
+                var categoriaResult = await _mediator.Send(new CategoriaDeleteCommand(id));
+
+                if (categoriaResult is null) return BadRequest();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
-        public async Task<IActionResult> AddCategoriaAsync([FromBody] CategoriaCommand command)
+        public async Task<IActionResult> AddCategoriaAsync([FromBody] CategoriaCadastroCommand command)
         {
             try
             {
@@ -62,5 +77,6 @@ namespace WM.ControleEstoque.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
     }
 }

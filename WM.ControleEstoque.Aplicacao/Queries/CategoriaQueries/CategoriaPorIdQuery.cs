@@ -3,9 +3,9 @@ using WM.ControleEstoque.Aplicacao.Dtos;
 
 namespace WM.ControleEstoque.Aplicacao.Queries.CategoriaQueries
 {
-    public class CategoriaQuery : IRequest<CategoriaDto>
+    public class CategoriaPorIdQuery : IRequest<CategoriaDto>
     {
-        public CategoriaQuery(Guid id)
+        public CategoriaPorIdQuery(Guid id)
         {
             Id = id;
         }

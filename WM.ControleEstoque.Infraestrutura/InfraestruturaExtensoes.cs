@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using WM.ControleEstoque.Dominio.Interfaces;
 using WM.ControleEstoque.Infraestrutura.DB;
+using WM.ControleEstoque.Dominio.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using WM.ControleEstoque.Infraestrutura.UnitOfWorks;
 
 namespace WM.ControleEstoque.Infraestrutura

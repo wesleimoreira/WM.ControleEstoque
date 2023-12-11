@@ -5,7 +5,7 @@ using WM.ControleEstoque.Dominio.Interfaces;
 
 namespace WM.ControleEstoque.Aplicacao.Queries.CategoriaQueries
 {
-    public class CategoriaQueryHandler : IRequestHandler<CategoriaQuery, CategoriaDto>, IRequestHandler<CategoriaListaQuery, IEnumerable<CategoriaDto>>
+    public class CategoriaQueryHandler : IRequestHandler<CategoriaPorIdQuery, CategoriaDto>, IRequestHandler<CategoriaListaQuery, IEnumerable<CategoriaDto>>
     {
         private readonly IUnitOfWork<Categoria> _unitOfWork;
 
@@ -14,7 +14,7 @@ namespace WM.ControleEstoque.Aplicacao.Queries.CategoriaQueries
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CategoriaDto> Handle(CategoriaQuery request, CancellationToken cancellationToken)
+        public async Task<CategoriaDto> Handle(CategoriaPorIdQuery request, CancellationToken cancellationToken)
         {
             var categoria = await _unitOfWork.ReadRepository.GetByIdAsync(request.Id);
 

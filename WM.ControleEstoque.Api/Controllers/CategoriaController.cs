@@ -26,11 +26,11 @@ namespace WM.ControleEstoque.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCategoria([FromRoute] Guid id)
+        public async Task<IActionResult> GetCategoriaAsync([FromRoute] Guid id)
         {
             try
             {
-                var categoriaResult = await _mediator.Send(new CategoriaQuery(id));
+                var categoriaResult = await _mediator.Send(new CategoriaPorIdQuery(id));
 
                 if (categoriaResult is null) return NotFound();
 
@@ -70,7 +70,7 @@ namespace WM.ControleEstoque.Api.Controllers
 
                 if (categoriaResult is null) return BadRequest();
 
-                return CreatedAtAction(nameof(GetCategoria), new { categoriaResult.Id }, command);
+                return CreatedAtAction(nameof(GetCategoriaAsync), new { categoriaResult.Id }, command);
             }
             catch (Exception ex)
             {

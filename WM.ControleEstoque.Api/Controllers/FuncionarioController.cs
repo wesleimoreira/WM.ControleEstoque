@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WM.ControleEstoque.Aplicacao.Commands.FuncionarioCommands;
 using WM.ControleEstoque.Aplicacao.Queries.FuncionarioQueries;
-using WM.ControleEstoque.Dominio.Entidades;
 
 namespace WM.ControleEstoque.Api.Controllers
 {
@@ -11,11 +10,21 @@ namespace WM.ControleEstoque.Api.Controllers
     public class FuncionarioController : ControllerBase
     {
         private readonly IMediator _mediator;
+        public FuncionarioController(IMediator mediator) => _mediator = mediator;
 
-        public FuncionarioController(IMediator mediator)
+        [HttpGet]
+        public async Task<IActionResult> ObterFuncionarios()
         {
-            _mediator = mediator;
+            try
+            {
+                return Ok(await _mediator.Send(new FuncionarioListaQuery()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterFuncionarioPorId(Guid id)
@@ -24,7 +33,7 @@ namespace WM.ControleEstoque.Api.Controllers
             {
                 var funcionario = await _mediator.Send(new FuncionarioPorIdQuery(id));
 
-                if(funcionario is null) return NotFound();
+                if (funcionario is null) return NotFound();
 
                 return Ok(funcionario);
             }
@@ -41,7 +50,7 @@ namespace WM.ControleEstoque.Api.Controllers
             {
                 var funcionario = await _mediator.Send(command);
 
-                if(funcionario is null) return BadRequest();
+                if (funcionario is null) return BadRequest();
 
                 return CreatedAtAction(nameof(ObterFuncionarioPorId), new { funcionario.Id }, funcionario);
             }

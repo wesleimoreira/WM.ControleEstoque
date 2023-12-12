@@ -10,11 +10,21 @@ namespace WM.ControleEstoque.Api.Controllers
     public class FornecedorController : ControllerBase
     {
         private readonly IMediator _mediator;
+        public FornecedorController(IMediator mediator) => _mediator = mediator;
 
-        public FornecedorController(IMediator mediator)
+        [HttpGet]
+        public async Task<IActionResult> ObterFornecedores()
         {
-            _mediator = mediator;
+            try
+            {
+                return Ok(await _mediator.Send(new FornecedorListaQuery()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterFornecedorPorId(Guid id)

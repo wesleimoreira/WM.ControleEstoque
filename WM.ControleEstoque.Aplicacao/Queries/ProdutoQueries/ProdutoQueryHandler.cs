@@ -1,24 +1,24 @@
 ﻿using MediatR;
 using WM.ControleEstoque.Aplicacao.Dtos;
 using WM.ControleEstoque.Dominio.Entidades;
-using WM.ControleEstoque.Infraestrutura.UnitOfWorks;
+using WM.ControleEstoque.Dominio.Interfaces;
 
 namespace WM.ControleEstoque.Aplicacao.Queries.ProdutoQueries
 {
     public class ProdutoQueryHandler : IRequestHandler<ProdutoPorIdQuery, ProdutoDto>, IRequestHandler<ProdutoListaQuery, IEnumerable<ProdutoDto>>
     {
-        private readonly UnitOfWork<Produto> _uniOfwork;
+        private readonly IUnitOfWork<Produto> _unitOfWork;
 
-        public ProdutoQueryHandler(UnitOfWork<Produto> uniOfwork)
+        public ProdutoQueryHandler(IUnitOfWork<Produto> unitOfWork)
         {
-            _uniOfwork = uniOfwork;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<ProdutoDto> Handle(ProdutoPorIdQuery request, CancellationToken cancellationToken)
         {
             if (request is null) return default!;
 
-            var produto = await _uniOfwork.ReadRepository.GetByIdAsync(request.Id);
+            var produto = await _unitOfWork.ReadRepository.GetByIdAsync(request.Id);
 
             if (produto is null) return default!;
 
@@ -27,7 +27,7 @@ namespace WM.ControleEstoque.Aplicacao.Queries.ProdutoQueries
 
         public async Task<IEnumerable<ProdutoDto>> Handle(ProdutoListaQuery request, CancellationToken cancellationToken)
         {
-            var produtos = await _uniOfwork.ReadRepository.GetAllAsync();
+            var produtos = await _unitOfWork.ReadRepository.GetAllAsync();
 
             if (produtos is null) return default!;
 

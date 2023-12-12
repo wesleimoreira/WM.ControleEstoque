@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WM.ControleEstoque.Aplicacao.Commands.LojaCommands;
 using WM.ControleEstoque.Aplicacao.Queries.LojaQueries;
-using WM.ControleEstoque.Dominio.Entidades;
 
 namespace WM.ControleEstoque.Api.Controllers
 {
@@ -11,11 +10,21 @@ namespace WM.ControleEstoque.Api.Controllers
     public class LojaController : ControllerBase
     {
         private readonly IMediator _mediator;
+        public LojaController(IMediator mediator) => _mediator = mediator;
 
-        public LojaController(IMediator mediator)
+        [HttpGet]
+        public async Task<IActionResult> ObterLojas()
         {
-            _mediator = mediator;
-        }     
+            try
+            {
+                return Ok(await _mediator.Send(new LojaListaQuery()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterLojaPorId(Guid id)
@@ -24,7 +33,7 @@ namespace WM.ControleEstoque.Api.Controllers
             {
                 var loja = await _mediator.Send(new LojaPorIdQuery(id));
 
-                if(loja is null) return NotFound();
+                if (loja is null) return NotFound();
 
                 return Ok(loja);
             }
@@ -36,14 +45,14 @@ namespace WM.ControleEstoque.Api.Controllers
 
         [HttpPost]
         public async Task<IActionResult> CadastrarLoja(LojaCadastroCommand command)
-        {    
+        {
             try
             {
                 var loja = await _mediator.Send(command);
 
                 if (loja is null) return BadRequest();
 
-                return CreatedAtAction(nameof(ObterLojaPorId), new { loja.Id}, loja);
+                return CreatedAtAction(nameof(ObterLojaPorId), new { loja.Id }, loja);
             }
             catch (Exception ex)
             {

@@ -12,6 +12,7 @@ namespace WM.ControleEstoque.Api.Controllers
         private readonly IMediator _mediator;
         public EnderecoController(IMediator mediator) => _mediator = mediator;
 
+
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterEnderecoPorId([FromRoute] Guid id)
         {

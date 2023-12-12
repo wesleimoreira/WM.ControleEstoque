@@ -10,11 +10,21 @@ namespace WM.ControleEstoque.Api.Controllers
     public class ProdutoController : ControllerBase
     {
         private readonly IMediator _mediator;
+        public ProdutoController(IMediator mediator) => _mediator = mediator;
 
-        public ProdutoController(IMediator mediator)
+        [HttpGet]
+        public async Task<IActionResult> ObterProdutos()
         {
-            _mediator = mediator;
+            try
+            {
+                return Ok(await _mediator.Send(new ProdutoListaQuery()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterProdutoPorId(Guid id)

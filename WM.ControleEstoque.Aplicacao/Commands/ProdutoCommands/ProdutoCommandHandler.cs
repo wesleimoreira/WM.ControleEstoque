@@ -1,15 +1,15 @@
 ﻿using MediatR;
 using WM.ControleEstoque.Aplicacao.Dtos;
 using WM.ControleEstoque.Dominio.Entidades;
-using WM.ControleEstoque.Infraestrutura.UnitOfWorks;
+using WM.ControleEstoque.Dominio.Interfaces;
 
 namespace WM.ControleEstoque.Aplicacao.Commands.ProdutoCommands
 {
     public class ProdutoCommandHandler : IRequestHandler<ProdutoCadastroCommand, ProdutoDto>
     {
-        private readonly UnitOfWork<Produto> _unitOfWork;
+        private readonly IUnitOfWork<Produto> _unitOfWork;
 
-        public ProdutoCommandHandler(UnitOfWork<Produto> unitOfWork)
+        public ProdutoCommandHandler(IUnitOfWork<Produto> unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -18,7 +18,7 @@ namespace WM.ControleEstoque.Aplicacao.Commands.ProdutoCommands
         {
             if (request is null) return default!;
 
-            var produto =  _unitOfWork.WriteRepository.CreateAsync(
+            var produto = _unitOfWork.WriteRepository.CreateAsync(
                 Produto.CadastroDeProduto(request.ProdutoNome, request.QuantidadeEstoque, request.ProdutoValorUnitario, request.CategoriaId, request.FornecedorId));
 
             if (produto is null) return default!;

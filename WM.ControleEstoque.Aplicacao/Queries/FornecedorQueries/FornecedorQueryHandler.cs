@@ -1,15 +1,15 @@
 ﻿using MediatR;
 using WM.ControleEstoque.Aplicacao.Dtos;
 using WM.ControleEstoque.Dominio.Entidades;
-using WM.ControleEstoque.Infraestrutura.UnitOfWorks;
+using WM.ControleEstoque.Dominio.Interfaces;
 
 namespace WM.ControleEstoque.Aplicacao.Queries.FornecedorQueries
 {
     public class FornecedorQueryHandler : IRequestHandler<FornecedorPorIdQuery, FornecedorDto>, IRequestHandler<FornecedorListaQuery, IEnumerable<FornecedorDto>>
     {
-        private readonly UnitOfWork<Fornecedor> _unitOfWork;
+        private readonly IUnitOfWork<Fornecedor> _unitOfWork;
 
-        public FornecedorQueryHandler(UnitOfWork<Fornecedor> unitOfWork)
+        public FornecedorQueryHandler(IUnitOfWork<Fornecedor> unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

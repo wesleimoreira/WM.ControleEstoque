@@ -26,7 +26,9 @@ namespace WM.ControleEstoque.Aplicacao.Commands.VendaProdutoCommands
 
             if (vendaProduto is null) return default!;
 
-            return new VendaProdutoDto(vendaProduto.Id, vendaProduto.ProdutoId, vendaProduto.QuantidadeVendida, vendaProduto.ValorVendaTotal);
+            await _unitOfWorkVenda.SaveChangesAsync();
+
+            return new VendaProdutoDto(vendaProduto.Id, vendaProduto.ProdutoId, vendaProduto.QuantidadeVendida, vendaProduto.ValorVendaTotal, vendaProduto.DataVenda);
         }
     }
 }

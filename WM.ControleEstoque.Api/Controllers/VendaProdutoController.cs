@@ -27,20 +27,7 @@ namespace WM.ControleEstoque.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        [HttpGet("periodo")]
-        public async Task<IActionResult> ObterListaDeVendasPorPeriodo(VendaProdutoPorPeriodoQuery query)
-        {
-            try
-            {
-                return Ok(await _mediator.Send(query));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        }      
 
         [HttpPost]
         public async Task<IActionResult> CadastroDeVendas(VendaProdutoCadastroCommand command)

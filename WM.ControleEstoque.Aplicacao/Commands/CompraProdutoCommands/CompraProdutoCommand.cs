@@ -16,6 +16,6 @@ namespace WM.ControleEstoque.Aplicacao.Commands.CompraProdutoCommands
         public Guid ProdutoId { get; private set; }
         public Guid FornecedorId { get; private set; }
         public int QuantidadeCompra { get; private set; }
-        public DateTime DataDaCompra { get; private set; }       
+        public DateTime DataDaCompra { get; private set; }
     }
 }

@@ -7,7 +7,7 @@ namespace WM.ControleEstoque.Aplicacao.Queries.VendaProdutoQueries
 {
     public class VendaProdutoQueryHandler :
         IRequestHandler<VendaProdutoListaQuery, IEnumerable<VendaProdutoDto>>,
-        IRequestHandler<VendaProdutoPorPeriodoQuery, IEnumerable<VendaProdutoDto>>
+        IRequestHandler<VendaProdutoHistoricoQuery, IEnumerable<HistoricoDeComprasDto>>
     {
         private readonly IUnitOfWork<VendaProduto> _unitOfWork;
 
@@ -24,13 +24,9 @@ namespace WM.ControleEstoque.Aplicacao.Queries.VendaProdutoQueries
                     select new VendaProdutoDto(venda.Id, venda.ProdutoId, venda.QuantidadeVendida, venda.ValorVendaTotal, venda.DataVenda)).ToList();
         }
 
-        public async Task<IEnumerable<VendaProdutoDto>> Handle(VendaProdutoPorPeriodoQuery request, CancellationToken cancellationToken)
+        public Task<IEnumerable<HistoricoDeComprasDto>> Handle(VendaProdutoHistoricoQuery request, CancellationToken cancellationToken)
         {
-            var vendas = await _unitOfWork.ReadRepository.GetAllAsync();
-
-            return (from venda in vendas
-                    where (venda.DataVenda.Date >= request.DataInicio.Date && venda.DataVenda.Date <= request.DataFim.Date)
-                    select new VendaProdutoDto(venda.Id, venda.ProdutoId, venda.QuantidadeVendida, venda.ValorVendaTotal, venda.DataVenda)).ToList();
+            throw new NotImplementedException();
         }
     }
 }

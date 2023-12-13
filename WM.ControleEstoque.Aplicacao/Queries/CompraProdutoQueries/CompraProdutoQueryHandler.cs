@@ -7,7 +7,7 @@ namespace WM.ControleEstoque.Aplicacao.Queries.CompraProdutoQueries
 {
     public class CompraProdutoQueryHandler :
         IRequestHandler<CompraProdutoListaQuery, IEnumerable<CompraProdutoDto>>,
-        IRequestHandler<CompraProdutoPorPeriodoQuery, IEnumerable<CompraProdutoDto>>
+        IRequestHandler<CompraProdutoHistoricoQuery, IEnumerable<HistoricoDeComprasDto>>
     {
         private readonly IUnitOfWork<CompraProduto> _unitOfWork;
 
@@ -24,13 +24,9 @@ namespace WM.ControleEstoque.Aplicacao.Queries.CompraProdutoQueries
                     select new CompraProdutoDto(compra.Id, compra.ProdutoId, compra.FornecedorId, compra.QuantidadeCompra, compra.ValorCompraTotal)).ToList();
         }
 
-        public async Task<IEnumerable<CompraProdutoDto>> Handle(CompraProdutoPorPeriodoQuery request, CancellationToken cancellationToken)
+        public Task<IEnumerable<HistoricoDeComprasDto>> Handle(CompraProdutoHistoricoQuery request, CancellationToken cancellationToken)
         {
-            var compras = await _unitOfWork.ReadRepository.GetAllAsync();
-
-            return (from compra in compras
-                    where (compra.DataDaCompra.Date >= request.DataInicio.Date && compra.DataDaCompra.Date <= request.DataFim.Date)
-                    select new CompraProdutoDto(compra.Id, compra.ProdutoId, compra.FornecedorId, compra.QuantidadeCompra, compra.ValorCompraTotal)).ToList();
+            throw new NotImplementedException();
         }
     }
 }

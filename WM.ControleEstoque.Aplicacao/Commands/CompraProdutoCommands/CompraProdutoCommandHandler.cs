@@ -22,13 +22,13 @@ namespace WM.ControleEstoque.Aplicacao.Commands.CompraProdutoCommands
 
             if (produto is null) return default!;
 
-            var compra = _unitOfWorkCompra.WriteRepository.CreateAsync(CompraProduto.CadastroDeCompraDeProdutos(produto, request.FornecedorId, request.QuantidadeCompra));
+            var compra = _unitOfWorkCompra.WriteRepository.CreateAsync(CompraProduto.CadastroDeCompraDeProdutos(produto, request.QuantidadeCompra));
 
             if(compra is null) return default!;
 
             await _unitOfWorkCompra.SaveChangesAsync();
 
-            return new CompraProdutoDto(compra.Id, compra.ProdutoId, compra.FornecedorId, compra.QuantidadeCompra, compra.ValorCompraTotal);
+            return new CompraProdutoDto(compra.Id,compra.Produto.Id, compra.Fornecedor.Id, compra.QuantidadeCompra, compra.ValorCompraTotal);
         }
     }
 }

@@ -2,18 +2,19 @@
 {
     public class VendaProduto : EntidadeBase
     {
-        private VendaProduto(Guid produtoId, int quantidadeVendida, decimal valorVendaTotal)
-        {
-            ProdutoId = produtoId;
+        private VendaProduto(int quantidadeVendida, decimal valorVendaTotal)
+        {            
             DataVenda = DateTime.Now;
             ValorVendaTotal = valorVendaTotal;
             QuantidadeVendida = quantidadeVendida;
         }
-
-        public Guid ProdutoId { get; private set; }
+  
         public  DateTime DataVenda { get; private set; }
         public int QuantidadeVendida {  get; private set; }
         public decimal ValorVendaTotal { get; private set; }
+
+        // EF
+        public Produto Produto { get; private set; } = default!;
 
         public static VendaProduto CadastroDeVenda(Produto produto, int quantidadeVendida)
         {
@@ -21,7 +22,7 @@
 
             if (quantidadeVendida.Equals(0)) return default!;               
 
-            return new VendaProduto(produto.Id, quantidadeVendida, (quantidadeVendida * produto.ProdutoValorUnitario));
+            return new VendaProduto(quantidadeVendida, (quantidadeVendida * produto.ProdutoValorUnitario));
         }
     }
 }

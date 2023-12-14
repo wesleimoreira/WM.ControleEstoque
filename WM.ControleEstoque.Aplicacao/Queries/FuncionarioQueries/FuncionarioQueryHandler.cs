@@ -16,7 +16,7 @@ namespace WM.ControleEstoque.Aplicacao.Queries.FuncionarioQueries
 
         public async Task<IEnumerable<FuncionarioDto>> Handle(FuncionarioListaQuery request, CancellationToken cancellationToken)
         {
-            var funcionarios = await _unitOfWork.ReadRepository.GetAllAsync();
+            var funcionarios = await _unitOfWork.ReadRepository.GetAllAsync(null, null);
 
             if (funcionarios is null) return default!;
 

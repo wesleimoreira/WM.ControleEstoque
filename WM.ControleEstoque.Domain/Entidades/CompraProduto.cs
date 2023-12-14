@@ -2,31 +2,28 @@
 {
     public class CompraProduto : EntidadeBase
     {
-        private CompraProduto(Guid produtoId, Guid fornecedorId, int quantidadeCompra, decimal valorCompraTotal)
-        {
-            ProdutoId = produtoId;
-            FornecedorId = fornecedorId;
+        private CompraProduto(int quantidadeCompra, decimal valorCompraTotal)
+        {          
             DataDaCompra = DateTime.Now;
             QuantidadeCompra = quantidadeCompra;
             ValorCompraTotal = valorCompraTotal;
         }
-
-        public Guid ProdutoId { get; private set; }
-        public Guid FornecedorId { get; private set; }
+       
         public int QuantidadeCompra { get; private set; }
         public DateTime DataDaCompra { get; private set; }
         public decimal ValorCompraTotal { get; private set; }
 
+        // EF
+        public Produto Produto { get; private set; } = default!;
+        public Fornecedor Fornecedor { get; private set; } = default!;
 
-        public static CompraProduto CadastroDeCompraDeProdutos(Produto produto, Guid fornecedorId, int quantidadeCompra)
+        public static CompraProduto CadastroDeCompraDeProdutos(Produto produto, int quantidadeCompra)
         {
             if (produto is null) return default!;
 
-            if (quantidadeCompra.Equals(0)) return default!;
+            if (quantidadeCompra.Equals(0)) return default!;         
 
-            if(string.IsNullOrWhiteSpace(fornecedorId.ToString())) return default!;
-
-            return new CompraProduto(produto.Id, fornecedorId, quantidadeCompra, (produto.ProdutoValorUnitario * quantidadeCompra));
+            return new CompraProduto(quantidadeCompra, (produto.ProdutoValorUnitario * quantidadeCompra));
         }
     }
 }

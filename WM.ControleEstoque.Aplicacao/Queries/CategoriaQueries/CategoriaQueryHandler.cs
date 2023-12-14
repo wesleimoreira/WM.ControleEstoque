@@ -25,7 +25,7 @@ namespace WM.ControleEstoque.Aplicacao.Queries.CategoriaQueries
 
         public async Task<IEnumerable<CategoriaDto>> Handle(CategoriaListaQuery request, CancellationToken cancellationToken)
         {
-            var categorias = await _unitOfWork.ReadRepository.GetAllAsync();
+            var categorias = await _unitOfWork.ReadRepository.GetAllAsync(null, null);
 
             if (categorias is null) return default!;
 

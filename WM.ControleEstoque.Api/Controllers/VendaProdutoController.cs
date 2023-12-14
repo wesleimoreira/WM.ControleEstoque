@@ -16,12 +16,12 @@ namespace WM.ControleEstoque.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ObterListaDeVendas()
+        [HttpGet("historico/{dataInicio?}/{dataFim?}")]
+        public async Task<IActionResult> ObterHistoricoDeVendas(DateTime? dataInicio, DateTime? dataFim)
         {
             try
             {
-                return Ok(await _mediator.Send(new VendaProdutoListaQuery()));
+                return Ok(await _mediator.Send(new VendaProdutoHistoricoQuery(dataInicio, dataFim)));
             }
             catch (Exception ex)
             {

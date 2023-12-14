@@ -27,7 +27,7 @@ namespace WM.ControleEstoque.Aplicacao.Queries.LojaQueries
 
         public async Task<IEnumerable<LojaDto>> Handle(LojaListaQuery request, CancellationToken cancellationToken)
         {
-            var lojas = await _unitOfWork.ReadRepository.GetAllAsync();
+            var lojas = await _unitOfWork.ReadRepository.GetAllAsync(null, null);
 
             if (lojas is null) return default!;
 

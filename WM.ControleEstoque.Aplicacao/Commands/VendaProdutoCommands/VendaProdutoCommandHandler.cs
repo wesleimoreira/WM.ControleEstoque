@@ -28,7 +28,7 @@ namespace WM.ControleEstoque.Aplicacao.Commands.VendaProdutoCommands
 
             await _unitOfWorkVenda.SaveChangesAsync();
 
-            return new VendaProdutoDto(vendaProduto.Id, vendaProduto.ProdutoId, vendaProduto.QuantidadeVendida, vendaProduto.ValorVendaTotal, vendaProduto.DataVenda);
+            return new VendaProdutoDto(vendaProduto.Id, vendaProduto.Produto.Id, vendaProduto.QuantidadeVendida, vendaProduto.ValorVendaTotal, vendaProduto.DataVenda);
         }
     }
 }

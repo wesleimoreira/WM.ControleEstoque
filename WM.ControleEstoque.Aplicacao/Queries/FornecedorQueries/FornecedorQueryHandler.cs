@@ -25,7 +25,7 @@ namespace WM.ControleEstoque.Aplicacao.Queries.FornecedorQueries
 
         public async Task<IEnumerable<FornecedorDto>> Handle(FornecedorListaQuery request, CancellationToken cancellationToken)
         {
-            var fornecedores = await _unitOfWork.ReadRepository.GetAllAsync();
+            var fornecedores = await _unitOfWork.ReadRepository.GetAllAsync(null, null);
 
             if (fornecedores is null) return default!;
 

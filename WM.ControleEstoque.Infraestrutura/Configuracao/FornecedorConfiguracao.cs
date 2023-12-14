@@ -13,7 +13,7 @@ namespace WM.ControleEstoque.Infraestrutura.Configuracao
 
             // EF
             builder.HasMany(x => x.Produtos).WithOne().HasForeignKey(x => x.FornecedorId).OnDelete(DeleteBehavior.Restrict);
-            builder.HasMany(x => x.CompraProdutos).WithOne().HasForeignKey(x => x.FornecedorId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.CompraProdutos).WithOne(x => x.Fornecedor).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
